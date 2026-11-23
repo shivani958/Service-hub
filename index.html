@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ServiceHub - Book Services</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+            Service<span>Hub</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="user-area">
+            <span class="username">Username</span>
+
+            <button id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
+        </div>
+
+    </nav>
+
+
+    <!-- Main Section -->
+    <main id="home" class="page">
+
+        <!-- LEFT SECTION -->
+        <section class="cart-panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <p class="eyebrow">YOUR CART</p>
+                    <h1>Added Items</h1>
+                </div>
+
+                <span id="cartCount" class="cart-count">0</span>
+
+            </div>
+
+
+            <!-- Cart Items -->
+            <div id="cartItems" class="cart-items">
+
+                <div class="empty-cart">
+
+                    <div class="empty-icon">
+                        🛒
+                    </div>
+
+                    <h2>No items added yet</h2>
+
+                    <p>
+                        Choose a service from the right
+                        and add it to your cart.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Total -->
+            <div class="total-box">
+
+                <span>Total Amount</span>
+
+                <strong id="totalAmount">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <!-- Booking Form -->
+            <div class="booking-card" id="booking">
+
+                <p class="eyebrow">
+                    READY TO BOOK?
+                </p>
+
+                <h2>Book Now</h2>
+
+                <p class="booking-note">
+                    Enter your details to confirm
+                    your selected services.
+                </p>
+
+
+                <form id="bookingForm">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        id="fullName"
+                        name="fullName"
+                        type="text"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn full-btn"
+                    >
+                        Book Now
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SECTION -->
+        <section id="services" class="services-panel">
+
+            <div class="hero-copy">
+
+                <p class="eyebrow">
+                    EXPLORE • SELECT • BOOK
+                </p>
+
+                <h2>
+                    Browse Our Services
+                </h2>
+
+                <p>
+                    Discover reliable services for your
+                    everyday needs. Select the services
+                    you want and add them to your cart.
+                </p>
+
+            </div>
+
+
+            <!-- Services will be created by JavaScript -->
+            <div
+                id="serviceGrid"
+                class="service-grid"
+            ></div>
+
+
+            <!-- Cart and Booking Options -->
+            <div class="action-bar">
+
+                <div>
+
+                    <strong>
+                        Selected services
+                    </strong>
+
+                    <p id="selectionText">
+                        Add items to your cart to continue.
+                    </p>
+
+                </div>
+
+
+                <div class="action-buttons">
+
+                    <button
+                        id="addToCartBtn"
+                        class="secondary-btn"
+                    >
+                        Add to Cart
+                    </button>
+
+                    <button
+                        id="bookNowBtn"
+                        class="primary-btn"
+                    >
+                        Book Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer id="about">
+
+        <div>
+
+            <strong>
+                ServiceHub
+            </strong>
+
+            <p>
+                Simple service discovery and booking.
+            </p>
+
+        </div>
+
+
+        <div id="contact">
+
+            <p>
+                Contact:
+                support@servicehub.example
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Toast Message -->
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+    ></div>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

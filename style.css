@@ -1,0 +1,818 @@
+/* ==========================================
+   BASIC RESET
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+:root {
+    --primary: #6c3df4;
+    --primary-dark: #5227ca;
+    --text: #202124;
+    --muted: #73777d;
+    --border: #e7e8ec;
+    --surface: #ffffff;
+    --background: #f6f7fb;
+    --danger: #e53935;
+    --success: #159957;
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: var(--text);
+
+    background-color: var(--background);
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   BUTTON AND INPUT
+========================================== */
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   NAVIGATION BAR
+========================================== */
+
+.navbar {
+    height: 72px;
+
+    background-color: var(--surface);
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 40px;
+
+    padding: 0 6%;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 20;
+}
+
+
+/* Logo */
+
+.logo {
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+
+/* Navigation Links */
+
+.nav-links {
+    display: flex;
+
+    gap: 28px;
+
+    margin: auto;
+}
+
+.nav-links a {
+    color: #555960;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+
+/* User Area */
+
+.user-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+.username {
+    font-weight: 600;
+
+    font-size: 14px;
+}
+
+
+/* Logout */
+
+.logout-btn {
+    border: none;
+
+    color: white;
+
+    background-color: var(--danger);
+
+    padding: 9px 17px;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+}
+
+.logout-btn:hover {
+    background-color: #c62828;
+}
+
+
+/* ==========================================
+   MAIN PAGE
+========================================== */
+
+.page {
+    width: min(1250px, 92%);
+
+    margin: 32px auto;
+
+    display: grid;
+
+    grid-template-columns: 360px 1fr;
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* ==========================================
+   LEFT CART SECTION
+========================================== */
+
+.cart-panel,
+.services-panel {
+    background-color: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(31, 35, 45, 0.06);
+}
+
+
+/* Cart Panel */
+
+.cart-panel {
+    padding: 24px;
+
+    position: sticky;
+
+    top: 96px;
+}
+
+
+/* Cart Heading */
+
+.panel-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.eyebrow {
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 4px;
+}
+
+.panel-heading h1 {
+    font-size: 24px;
+}
+
+
+/* Cart Count */
+
+.cart-count {
+    min-width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    background-color: #eee9ff;
+
+    color: var(--primary);
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   EMPTY CART
+========================================== */
+
+.cart-items {
+    min-height: 190px;
+
+    margin: 20px 0;
+}
+
+.empty-cart {
+    min-height: 190px;
+
+    border: 1px dashed #d8d9df;
+
+    border-radius: 14px;
+
+    display: grid;
+
+    place-items: center;
+
+    text-align: center;
+
+    padding: 22px;
+}
+
+.empty-icon {
+    font-size: 38px;
+}
+
+.empty-cart h2 {
+    font-size: 16px;
+
+    margin: 6px 0;
+}
+
+.empty-cart p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   CART ITEMS
+========================================== */
+
+.cart-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-bottom: 1px solid var(--border);
+
+    padding: 13px 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item h3 {
+    font-size: 14px;
+}
+
+.cart-item p {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* Remove Button */
+
+.remove-btn {
+    border: none;
+
+    background-color: #fff0f0;
+
+    color: var(--danger);
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   TOTAL AMOUNT
+========================================== */
+
+.total-box {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background-color: #f7f5ff;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin-bottom: 22px;
+}
+
+.total-box strong {
+    font-size: 20px;
+
+    color: var(--primary);
+}
+
+
+/* ==========================================
+   BOOKING FORM
+========================================== */
+
+.booking-card {
+    border-top: 1px solid var(--border);
+
+    padding-top: 22px;
+}
+
+.booking-card h2 {
+    font-size: 22px;
+
+    margin-bottom: 4px;
+}
+
+.booking-note {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Form Labels */
+
+.booking-card label {
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin: 12px 0 6px;
+}
+
+
+/* Form Inputs */
+
+.booking-card input {
+    width: 100%;
+
+    border: 1px solid #dfe1e6;
+
+    border-radius: 8px;
+
+    padding: 11px 12px;
+
+    outline: none;
+}
+
+.booking-card input:focus {
+    border-color: var(--primary);
+}
+
+
+/* ==========================================
+   RIGHT SERVICES SECTION
+========================================== */
+
+.services-panel {
+    padding: 28px;
+}
+
+
+/* Hero */
+
+.hero-copy {
+    margin-bottom: 24px;
+}
+
+.hero-copy h2 {
+    font-size: 30px;
+
+    margin: 3px 0 8px;
+}
+
+.hero-copy > p:last-child {
+    max-width: 650px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   SERVICE GRID
+========================================== */
+
+.service-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+
+/* Service Card */
+
+.service-card {
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background-color: white;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 22px rgba(31, 35, 45, 0.08);
+}
+
+
+/* Service Image */
+
+.service-image {
+    width: 100%;
+
+    height: 170px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Service Content */
+
+.service-content {
+    padding: 16px;
+}
+
+.service-content h3 {
+    font-size: 17px;
+
+    margin-bottom: 4px;
+}
+
+.service-content p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 13px;
+}
+
+
+/* Service Footer */
+
+.service-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.price {
+    font-weight: 800;
+
+    font-size: 17px;
+}
+
+
+/* Service Buttons */
+
+.service-actions {
+    display: flex;
+
+    gap: 7px;
+}
+
+.skip-btn,
+.add-btn,
+.primary-btn,
+.secondary-btn {
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 9px 13px;
+
+    font-weight: 700;
+
+    font-size: 12px;
+}
+
+
+/* Skip */
+
+.skip-btn {
+    background-color: #f0f1f4;
+
+    color: #555960;
+}
+
+
+/* Add */
+
+.add-btn {
+    background-color: #eee9ff;
+
+    color: var(--primary);
+}
+
+.add-btn.selected {
+    background-color: var(--success);
+
+    color: white;
+}
+
+
+/* Primary */
+
+.primary-btn {
+    background-color: var(--primary);
+
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+
+/* Secondary */
+
+.secondary-btn {
+    background-color: #eee9ff;
+
+    color: var(--primary);
+}
+
+
+/* ==========================================
+   ACTION BAR
+========================================== */
+
+.action-bar {
+    margin-top: 22px;
+
+    padding: 17px;
+
+    background-color: #faf9ff;
+
+    border: 1px solid #ebe7ff;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.action-bar strong {
+    font-size: 14px;
+}
+
+.action-bar p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 2px;
+}
+
+.action-buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+
+/* Full Width Button */
+
+.full-btn {
+    width: 100%;
+
+    margin-top: 16px;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    background-color: #202124;
+
+    color: white;
+
+    margin-top: 50px;
+
+    padding: 30px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+footer p {
+    color: #bfc2c7;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* ==========================================
+   TOAST MESSAGE
+========================================== */
+
+.toast {
+    position: fixed;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    background-color: #202124;
+
+    color: white;
+
+    padding: 12px 17px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    pointer-events: none;
+
+    transition: 0.25s;
+
+    z-index: 50;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 950px) {
+
+    .navbar {
+        gap: 20px;
+
+        padding: 0 4%;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .page {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-panel {
+        position: static;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .navbar {
+        height: auto;
+
+        padding: 16px 5%;
+
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .user-area {
+        margin-left: auto;
+    }
+
+    .services-panel {
+        padding: 20px;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-bar {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .action-buttons {
+        width: 100%;
+    }
+
+    .action-buttons button {
+        flex: 1;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
