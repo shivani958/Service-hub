@@ -513,3 +513,74 @@ footer p {
     flex-direction: column;
   }
 }
+/* LOGIN AND SIGNUP PAGES */
+
+.auth-section {
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #f5f3ff;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card h1 {
+  text-align: center;
+  color: #5632a8;
+  margin-bottom: 10px;
+}
+
+.auth-card > p {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #666;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-card label {
+  font-weight: 600;
+}
+
+.auth-card input {
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.auth-card .primary-btn {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.auth-error {
+  color: #d93025;
+  font-size: 14px;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth-switch button {
+  border: none;
+  background: none;
+  color: #5632a8;
+  font-weight: bold;
+  cursor: pointer;
+}

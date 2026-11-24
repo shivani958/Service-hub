@@ -1,45 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
+import Login from "./login.jsx";
+import Signup from "./signup.jsx";
+import { getServices, createBooking, sendContactMessage } from "./api";
 import "./App.css";
-
-const services = [
-  {
-    id: 1,
-    name: "Home Cleaning",
-    description: "Professional home cleaning services.",
-    price: 499,
-    image: "/images/cleaning.jpg",
-    icon: "🏠"
-  },
-  {
-    id: 2,
-    name: "Plumbing",
-    description: "Expert plumbing and repair services.",
-    price: 299,
-    image: "/images/plumbing.jpg",
-    icon: "🔧"
-  },
-  {
-    id: 3,
-    name: "Electrical",
-    description: "Safe and reliable electrical services.",
-    price: 399,
-    image: "/images/electrician.jpg",
-    icon: "⚡"
-  },
-  {
-    id: 4,
-    name: "AC Repair",
-    description: "AC servicing and maintenance.",
-    price: 599,
-    image: "/images/ac-repair.jpg",
-    icon: "❄️"
-  }
-];
 
 function App() {
   const [page, setPage] = useState("home");
   const [cart, setCart] = useState([]);
   const [username, setUsername] = useState("Username");
+  const [token, setToken] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [serviceError, setServiceError] = useState("");
+
+useEffect(() => {
+  async function loadServices() {
+    try {
+      const data = await getServices();
+
+      const updatedServices = data.map((service) => ({
+        ...service,
+        id: service._id,
+        icon:
+          service.name === "Home Cleaning" ? "🏠" :
+          service.name === "Plumbing" ? "🔧" :
+          service.name === "Electrical" ? "⚡" :
+          service.name === "AC Repair" ? "❄️" : "🛠️"
+      }));
+
+      setServices(updatedServices);
+    } catch (error) {
+      setServiceError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  loadServices();
+}, []);
+const handleLogin = (data) => {
+    setToken(data.token);
+    setCurrentUser(data.user);
+    setUsername(data.user.name);
+    setPage("home");
+  };
+
+  const handleSignup = () => {
+    alert("Account created successfully! Please login.");
+    setPage("login");
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    setCurrentUser(null);
+    setUsername("Guest");
+    setPage("home");
+  };
 
   // Add service to cart
   const addToCart = (service) => {
@@ -96,29 +113,62 @@ function App() {
 
     setPage("booking");
   };
+  const confirmBooking = async (event) => {
+  event.preventDefault();
 
-  const confirmBooking = (event) => {
-    event.preventDefault();
+  try {
+    const form = new FormData(event.target);
 
-    alert("Your booking has been confirmed successfully!");
+    const bookingData = {
+      customerName: form.get("customerName"),
+      email: form.get("email"),
+      phone: form.get("phone"),
+      address: form.get("address"),
+      bookingDate: form.get("bookingDate"),
+      serviceIds: [...new Set(cart.map((item) => item.id))]
+    };
+
+    const result = await createBooking(bookingData, token);
+
+    alert(result.message);
 
     setCart([]);
     setPage("home");
-  };
+
+  } catch (error) {
+    alert(error.message || "Booking failed. Please try again.");
+  }
+};
+  
 
   // Contact form
-  const sendMessage = (event) => {
-    event.preventDefault();
+  const sendMessage = async (event) => {
+  event.preventDefault();
 
-    alert("Your message has been sent successfully!");
+  try {
+    const form = new FormData(event.target);
+
+    const contactData = {
+      name: form.get("name"),
+      email: form.get("email"),
+      subject: form.get("subject"),
+      message: form.get("message")
+    };
+
+    const result = await sendContactMessage(contactData);
+
+    alert(result.message);
     event.target.reset();
-  };
+
+  } catch (error) {
+    alert(error.message || "Unable to send your message.");
+  }
+};
 
   // Logout
   const logout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
-      setUsername("Guest");
-      setPage("home");
+      handleLogout();
     }
   };
 
@@ -138,9 +188,21 @@ function App() {
           <button onClick={() => setPage("services")}>Services</button>
           <button onClick={() => setPage("about")}>About Us</button>
           <button onClick={() => setPage("contact")}>Contact Us</button>
+          {!token && (
+  <>
+    <button onClick={() => setPage("login")}>
+      Login
+    </button>
+
+    <button onClick={() => setPage("signup")}>
+      Sign Up
+    </button>
+  </>
+)}
           <button onClick={() => setPage("cart")}>
             Cart ({cart.reduce((sum, item) => sum + item.quantity, 0)})
           </button>
+
         </div>
 
         <div className="user-area">
@@ -190,6 +252,9 @@ function App() {
             </div>
 
             <h2 className="section-title">Our Popular Services</h2>
+            {loading && <p>Loading services...</p>}
+
+{serviceError && <p>{serviceError}</p>}
 
             <div className="service-container">
               {services.slice(0, 3).map((service) => (
@@ -218,7 +283,9 @@ function App() {
 
             <h1>Our Services</h1>
             <p>Choose the service you need.</p>
+{loading && <p>Loading services...</p>}
 
+{serviceError && <p>{serviceError}</p>}
             <div className="service-container">
               {services.map((service) => (
                 <ServiceCard
@@ -338,21 +405,21 @@ function App() {
               <form onSubmit={confirmBooking}>
 
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your name" required />
+                <input type="text" name="customerName" placeholder="Enter your name" required />
 
                 <label>Email Address</label>
-                <input type="email" placeholder="Enter your email" required />
+                <input type="email" name="email" placeholder="Enter your email" required />
 
                 <label>Phone Number</label>
-                <input type="tel" placeholder="Enter phone number"
+                <input type="tel" name="phone" placeholder="Enter phone number"
                   pattern="[0-9]{10}" required />
 
                 <label>Service Address</label>
-                <textarea placeholder="Enter your complete address"
+                <textarea name="address" placeholder="Enter your complete address"
                   required />
 
                 <label>Booking Date</label>
-                <input type="date" min={new Date().toISOString().split("T")[0]}
+                <input type="date" name="bookingDate" min={new Date().toISOString().split("T")[0]}
                   required />
 
                 <button className="primary-btn" type="submit">
@@ -432,16 +499,16 @@ function App() {
               <form className="contact-form" onSubmit={sendMessage}>
 
                 <label>Your Name</label>
-                <input type="text" placeholder="Enter your name" required />
+                <input type="text"  name="name" placeholder="Enter your name" required />
 
                 <label>Email Address</label>
-                <input type="email" placeholder="Enter your email" required />
+                <input type="email" name="email" placeholder="Enter your email" required />
 
                 <label>Subject</label>
-                <input type="text" placeholder="Enter subject" required />
+                <input type="text" name="subject" placeholder="Enter subject" required />
 
                 <label>Your Message</label>
-                <textarea placeholder="Write your message..." required />
+                <textarea name="message" placeholder="Write your message..." required />
 
                 <button className="primary-btn" type="submit">
                   Send Message
@@ -463,6 +530,19 @@ function App() {
 
           </section>
         )}
+        {page === "login" && (
+  <Login
+    onLogin={handleLogin}
+    onSignup={() => setPage("signup")}
+  />
+)}
+
+{page === "signup" && (
+  <Signup
+    onSignup={handleSignup}
+    onLogin={() => setPage("login")}
+  />
+)}
 
       </main>
 
@@ -475,7 +555,7 @@ function App() {
         </div>
 
         <div>
-          <p>Contact: support@servicehub.com</p>
+          <p>Contact: servicehub@gmail.com</p>
           <p>© 2026 ServiceHub. All Rights Reserved.</p>
         </div>
       </footer>
