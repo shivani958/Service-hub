@@ -201,6 +201,6 @@ Domain: Home Services Booking Platform
 ![cart Page](screenshots1/cart.png)
 
 ### Contact Page
-![Contact Page](screenshots/contactus.png)
+![Contact Page](screenshots1/contactus.png)
 
 ⭐ If you find this project useful, consider giving the repository a star!
