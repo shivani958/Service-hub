@@ -203,4 +203,18 @@ Domain: Home Services Booking Platform
 ### Contact Page
 ![Contact Page](screenshots1/contactus.png)
 
+
+---
+
+## 🚀 AWS Live Deployment
+
+**Live Website:**  
+http://ServiceHub-ALB-180870333.ap-south-1.elb.amazonaws.com
+
+**GitHub Repository:**  
+https://github.com/shivani958/Service-hub
+
+**Hosting:** AWS EC2 + Application Load Balancer  
+**Database:** MongoDB Atlas
+
 ⭐ If you find this project useful, consider giving the repository a star!
