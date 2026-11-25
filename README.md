@@ -180,5 +180,27 @@ Project Type: Full-Stack Web Application
 Domain: Home Services Booking Platform
 
 ---
+## 📸 Website Screenshots
+
+### Home Page
+![Home Page](screenshots1/homepage.png)
+
+### About Page
+![About Page](screenshots1/aboutus.png)
+
+### Services Page
+![Services Page](screenshots1/services.png)
+
+### Login Page
+![Login Page](screenshots1/login.png)
+
+### signup Page
+![Booking Page](screenshots1/signup.png)
+
+### cart Page
+![cart Page](screenshots1/cart.png)
+
+### Contact Page
+![Contact Page](screenshots/contactus.png)
 
 ⭐ If you find this project useful, consider giving the repository a star!
