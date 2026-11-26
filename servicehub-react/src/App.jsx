@@ -5,7 +5,11 @@ import { getServices, createBooking, sendContactMessage } from "./api";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState(()=>{
+    const path = window.location.pathname;
+    const currentPage = path.split("/").filter(Boolean).pop();
+    return currentPage || "home";
+  });
   const [cart, setCart] = useState([]);
   const [username, setUsername] = useState("Username");
   const [token, setToken] = useState("");
@@ -13,6 +17,29 @@ function App() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [serviceError, setServiceError] = useState("");
+  useEffect(() => {
+  const handlePopState = () => {
+    const path = window.location.pathname;
+    const currentPage = path.split("/").filter(Boolean).pop();
+
+    setPage(currentPage || "home");
+  };
+
+  window.addEventListener("popstate", handlePopState);
+
+  return () => {
+    window.removeEventListener("popstate", handlePopState);
+  };
+}, []);
+const navigateTo = (newPage) => {
+  setPage(newPage);
+
+  const basePath = "/app/";
+  const newPath =
+    newPage === "home" ? basePath : basePath + newPage;
+
+  window.history.pushState({}, "", newPath);
+};
 
 useEffect(() => {
   async function loadServices() {
@@ -184,22 +211,22 @@ const handleLogin = (data) => {
         </h2>
 
         <div className="nav-links">
-          <button onClick={() => setPage("home")}>Home</button>
-          <button onClick={() => setPage("services")}>Services</button>
-          <button onClick={() => setPage("about")}>About Us</button>
-          <button onClick={() => setPage("contact")}>Contact Us</button>
+          <button onClick={() => navigateTo("home")}>Home</button>
+          <button onClick={() => navigateTo("services")}>Services</button>
+          <button onClick={() => navigateTo("about")}>About Us</button>
+          <button onClick={() => navigateTo("contact")}>Contact Us</button>
           {!token && (
   <>
-    <button onClick={() => setPage("login")}>
+    <button onClick={() => navigateTo("login")}>
       Login
     </button>
 
-    <button onClick={() => setPage("signup")}>
+    <button onClick={() => navigateTo("signup")}>
       Sign Up
     </button>
   </>
 )}
-          <button onClick={() => setPage("cart")}>
+          <button onClick={() => navigateTo("cart")}>
             Cart ({cart.reduce((sum, item) => sum + item.quantity, 0)})
           </button>
 
